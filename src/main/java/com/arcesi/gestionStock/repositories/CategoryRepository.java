@@ -7,4 +7,6 @@ import com.arcesi.gestionStock.entities.CategoryBean;
 @Repository
 public interface CategoryRepository  extends JpaRepository<CategoryBean, Long>{
 
+	
+	CategoryBean findCategoryBeanByCodeCategorie(String codeUnique);
 }

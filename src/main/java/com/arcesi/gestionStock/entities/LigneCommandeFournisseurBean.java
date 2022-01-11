@@ -1,6 +1,7 @@
 package com.arcesi.gestionStock.entities;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -32,8 +31,8 @@ import lombok.ToString;
         		 @UniqueConstraint(columnNames = "CODE_LIGNE_COMMANDE_FOURNISSEUR",name="CODE_LIGNE_COMMANDE_FOURNISSEUR_SEQUENCE")
          }    
 		)
-@Builder
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+ 
+@Setter @Getter   @ToString
 @EqualsAndHashCode(callSuper = true)
 public class LigneCommandeFournisseurBean extends AbstractEntity {
 
@@ -67,5 +66,22 @@ public class LigneCommandeFournisseurBean extends AbstractEntity {
 	
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+
+	@Builder
+	public LigneCommandeFournisseurBean(Instant createdDate, Instant lastUpdateDate, Long code,
+			String codeLigneCommandeFournisseur, ArticleBean articleBean,
+			CommandeFournisseurBean commandeFournisseurBean, BigDecimal quantite, BigDecimal prixUnitaire,
+			Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeLigneCommandeFournisseur = codeLigneCommandeFournisseur;
+		this.articleBean = articleBean;
+		this.commandeFournisseurBean = commandeFournisseurBean;
+		this.quantite = quantite;
+		this.prixUnitaire = prixUnitaire;
+		this.idEntreprise = idEntreprise;
+	}
+
+	
 	
 }

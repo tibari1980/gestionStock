@@ -1,5 +1,6 @@
 package com.arcesi.gestionStock.entities;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
@@ -18,11 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -38,8 +37,8 @@ import lombok.ToString;
         }
 
 		)
-@Builder
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+ 
+@Setter @Getter   @ToString
 @EqualsAndHashCode(callSuper = true)
 public class UtilisateurBean extends AbstractEntity {
 
@@ -92,5 +91,27 @@ public class UtilisateurBean extends AbstractEntity {
 	public Integer getAge() {
 		return Period.between(this.dateNaissance, LocalDate.now()).getYears();
 	}
+
+	@Builder
+	public UtilisateurBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeUtilisateur, String nom,
+			String prenom, String email, String password, AdresseBean adresse, String telephone, String photo,
+			LocalDate dateNaissance, Integer age, EntrepriseBean entrepriseBean, Collection<RoleBean> roleBeans) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeUtilisateur = codeUtilisateur;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.password = password;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.photo = photo;
+		this.dateNaissance = dateNaissance;
+		this.age = age;
+		this.entrepriseBean = entrepriseBean;
+		this.roleBeans = roleBeans;
+	}
+
+	
 	
 }

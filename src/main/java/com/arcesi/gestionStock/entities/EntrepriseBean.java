@@ -1,5 +1,6 @@
 package com.arcesi.gestionStock.entities;
 
+import java.time.Instant;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -13,11 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -25,7 +24,6 @@ import lombok.ToString;
  * @author tibari ZEROUAL
  * Ingénieur développement 
  */
-@Builder
 @Entity
 @Table(name="ENTREPRISE",
          uniqueConstraints = {
@@ -33,7 +31,7 @@ import lombok.ToString;
         		 @UniqueConstraint(columnNames = "CODE_ENTREPRISE",name="CODE_ENTREPRISE_SEQUENCE")
          }   
 		)
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+@Setter @Getter  @ToString
 @EqualsAndHashCode(callSuper = true)
 public class EntrepriseBean extends AbstractEntity {
 
@@ -67,5 +65,22 @@ public class EntrepriseBean extends AbstractEntity {
 	private String telephone;
 	@OneToMany(mappedBy = "entrepriseBean")
 	private Collection<UtilisateurBean> utilisateurBeans;
+	
+	@Builder
+	public EntrepriseBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeEntreprise,
+			String raisonSocial, String siret, String numeroTVA, AdresseBean adresseBean, String email,
+			String telephone, Collection<UtilisateurBean> utilisateurBeans) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeEntreprise = codeEntreprise;
+		this.raisonSocial = raisonSocial;
+		this.siret = siret;
+		this.numeroTVA = numeroTVA;
+		this.adresseBean = adresseBean;
+		this.email = email;
+		this.telephone = telephone;
+		this.utilisateurBeans = utilisateurBeans;
+	}
+	
 	
 }

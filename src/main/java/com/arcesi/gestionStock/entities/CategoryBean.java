@@ -1,5 +1,6 @@
 package com.arcesi.gestionStock.entities;
 
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,62 +16,57 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 /**
  * 
- * @author Tibari Zeroual
- * Ingénieur Dev
+ * @author Tibari Zeroual Ingénieur Dev
  */
-@Getter
-@Setter
-@AllArgsConstructor
-@Builder
+
 @Entity
-@Table(name="CATEGORIE",
-          uniqueConstraints = {
-        		  @UniqueConstraint(columnNames ="CODE_CATEGORIE" ,name="CODE_CATEGORIE_SEQU"),
-        		  @UniqueConstraint(columnNames = "CODE_UNIQUE_CATEGORIE",name = "CODE_UNIQUE_CATEGORIE_SEQU")
-          })  
+@Table(name = "CATEGORIE", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "CODE_CATEGORIE", name = "CODE_CATEGORIE_SEQU"),
+		@UniqueConstraint(columnNames = "CODE_UNIQUE_CATEGORIE", name = "CODE_UNIQUE_CATEGORIE_SEQU") })
+@ToString @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 
-//@EqualsAndHashCode(callSuper = true)
-public class CategoryBean   {
+public class CategoryBean extends AbstractEntity {
 
-	 
 	private static final long serialVersionUID = 5749431101269951781L;
-	@SequenceGenerator(allocationSize = 1,
-			           sequenceName = "categorie_sequence",
-			           name="categorie_sequence"
-			           )
+	@SequenceGenerator(allocationSize = 1, sequenceName = "categorie_sequence", name = "categorie_sequence")
 	@Id
-	@GeneratedValue(
-			         generator = "categorie_sequence",
-	                 strategy = GenerationType.SEQUENCE
-	                 )
-	@Column(name="CODE_CATEGORIE")
+	@GeneratedValue(generator = "categorie_sequence", strategy = GenerationType.SEQUENCE)
+	@Column(name = "CODE_CATEGORIE")
 	private Long code;
-	
-	@Column(name="CODE_UNIQUE_CATEGORIE",unique = true,nullable = false,insertable = true,length = 40)
+
+	@Column(name = "CODE_UNIQUE_CATEGORIE", unique = true, nullable = false, insertable = true, length = 40)
 	private String codeCategorie;
-	
-	@Column(name="DESIGNATION",length = 40,nullable = false,unique = true)
+
+	@Column(name = "DESIGNATION", length = 40, nullable = false, unique = true)
 	private String designation;
-	
+
 	@Transient
-	@OneToMany(mappedBy = "categoryBean",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "categoryBean", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ArticleBean> articleBeans;
-	
-	@Column(name="identifiant_entreprise")
+
+	@Column(name = "identifiant_entreprise")
 	private Integer idEntreprise;
 
-	public CategoryBean() {
-		super();
+	@Builder
+	public CategoryBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeCategorie,
+			String designation, List<ArticleBean> articleBeans, Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeCategorie = codeCategorie;
+		this.designation = designation;
+		this.articleBeans = articleBeans;
+		this.idEntreprise = idEntreprise;
 	}
-	
-	
 
+	
 }

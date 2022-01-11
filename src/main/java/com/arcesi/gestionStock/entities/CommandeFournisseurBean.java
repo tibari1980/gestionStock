@@ -15,21 +15,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-@Builder
+
 @Entity
 @Table(name="COMMANDE_FOURNISSEUR",
             uniqueConstraints = {
             		@UniqueConstraint(columnNames = "CODE_COMMANDE_FOUNISSEUR_UNIQUE",name = "CODE_COMMANDE_FOUNISSEUR_UNIQUE_SEQUENCE"),
             		@UniqueConstraint(columnNames = "CODE_COMMANDE_FOURNISSEUR",name="CODE_COMMANDE_FOURNISSEUR_SEQUENCE")
             })
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+@ToString @Getter @Setter
 @EqualsAndHashCode(callSuper = true)
 public class CommandeFournisseurBean  extends AbstractEntity{
 
@@ -61,5 +59,21 @@ public class CommandeFournisseurBean  extends AbstractEntity{
 	
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+
+	@Builder
+	public CommandeFournisseurBean(Instant createdDate, Instant lastUpdateDate, Long code,
+			String codeCommandeFounisseur, Instant dateCommande, FournisseurBean fournisseurBean,
+			Collection<LigneCommandeFournisseurBean> ligneCommandeFournisseurBeans, Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeCommandeFounisseur = codeCommandeFounisseur;
+		this.dateCommande = dateCommande;
+		this.fournisseurBean = fournisseurBean;
+		this.ligneCommandeFournisseurBeans = ligneCommandeFournisseurBeans;
+		this.idEntreprise = idEntreprise;
+	}
+
+	
+
 	
 }

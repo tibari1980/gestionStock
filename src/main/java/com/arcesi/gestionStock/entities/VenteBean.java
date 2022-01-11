@@ -11,11 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -23,7 +21,7 @@ import lombok.ToString;
  * @author Mr Zeroual Tibari
  * Ingénieur developpement
  */
-@Builder
+ 
 @Entity
 @Table(name="VENTE",
         uniqueConstraints = {
@@ -31,7 +29,7 @@ import lombok.ToString;
         		@UniqueConstraint(columnNames = "CODE_VENTE",name="CODE_VENTE_SEQUENCE")
         }  
 		)
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+@Setter @Getter  @ToString
 @EqualsAndHashCode(callSuper = true)
 public class VenteBean extends AbstractEntity{
 
@@ -57,5 +55,19 @@ public class VenteBean extends AbstractEntity{
 	private String commentaire;
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+	
+	@Builder
+	public VenteBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeVente, Instant dateVente,
+			String commentaire, Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeVente = codeVente;
+		this.dateVente = dateVente;
+		this.commentaire = commentaire;
+		this.idEntreprise = idEntreprise;
+	}
+	
+	
+	
 	
 }

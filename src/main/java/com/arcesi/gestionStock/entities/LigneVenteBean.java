@@ -1,6 +1,7 @@
 package com.arcesi.gestionStock.entities;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -28,8 +27,8 @@ import lombok.ToString;
 				@UniqueConstraint(columnNames = "CODE_LIGNE_VENTE",name = "CODE_LIGNE_VENTE_SEQUENCE")
 		}
 		)
-@Builder
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+ 
+@Setter @Getter  @ToString
 @EqualsAndHashCode(callSuper = true)
 public class LigneVenteBean extends AbstractEntity {
 
@@ -58,4 +57,19 @@ public class LigneVenteBean extends AbstractEntity {
 	
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+
+	@Builder
+	public LigneVenteBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeLigneVente,
+			VenteBean venteBean, BigDecimal quantite, Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeLigneVente = codeLigneVente;
+		this.venteBean = venteBean;
+		this.quantite = quantite;
+		this.idEntreprise = idEntreprise;
+	}
+
+	 
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.arcesi.gestionStock.entities;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
@@ -16,11 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -28,7 +27,6 @@ import lombok.ToString;
  * @author Mr Zeroual Tibari
  *Ingénieur developpement
  */
-@Builder
 @Entity
 @Table(name="CLIENT",
              uniqueConstraints = {
@@ -36,7 +34,8 @@ import lombok.ToString;
             		 @UniqueConstraint(columnNames = "EMAIL",name="EMAIL_CLIENT_SEQUENCE"),
             		 @UniqueConstraint(columnNames = "CODE_CLIENT_UNIQUE",name="CODE_CLIENT_UNIQUE_SEQUENCE")
              })
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+
+@Getter @Setter @ToString
 @EqualsAndHashCode(callSuper = true)
 
 public class ClientBean extends AbstractEntity {
@@ -81,4 +80,26 @@ public class ClientBean extends AbstractEntity {
 	public Integer getAge() {
 		return Period.between(dateNaissance, LocalDate.now()).getYears();
 	}
+
+	@Builder
+	public ClientBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeClient, String nom,
+			String prenom, String email, AdresseBean adresse, String telephone, String photo, LocalDate dateNaissance,
+			Integer age, Collection<CommandeClientBean> clientBeans) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeClient = codeClient;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.photo = photo;
+		this.dateNaissance = dateNaissance;
+		this.age = age;
+		this.clientBeans = clientBeans;
+	}
+
+	 
+	
+	
 }

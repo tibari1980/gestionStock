@@ -1,5 +1,6 @@
 package com.arcesi.gestionStock.entities;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
@@ -16,11 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -31,8 +30,8 @@ import lombok.ToString;
         		 @UniqueConstraint(columnNames = "CODE_FOURNISSEUR_UNIQUE",name = "CODE_FOURNISSEUR_UNIQUE_SEQUENCE")
          }
 		)
-@Builder
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+ 
+@Setter @Getter  @ToString
 @EqualsAndHashCode(callSuper = true)
 public class FournisseurBean  extends AbstractEntity{
 
@@ -79,4 +78,28 @@ public class FournisseurBean  extends AbstractEntity{
 	public Integer getAge() {
 		return Period.between(dateNaissance, LocalDate.now()).getYears();
 	}
+
+
+	@Builder
+	public FournisseurBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeFournisseur, String nom,
+			String prenom, String email, AdresseBean adresse, String telephone, String photo, LocalDate dateNaissance,
+			Integer age, Collection<CommandeFournisseurBean> commandeFournisseurBeans, Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeFournisseur = codeFournisseur;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.photo = photo;
+		this.dateNaissance = dateNaissance;
+		this.age = age;
+		this.commandeFournisseurBeans = commandeFournisseurBeans;
+		this.idEntreprise = idEntreprise;
+	}
+
+
+	
+	
 }

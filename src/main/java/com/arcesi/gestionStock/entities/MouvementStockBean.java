@@ -16,11 +16,9 @@ import javax.persistence.UniqueConstraint;
 
 import com.arcesi.gestionStock.enums.TypeMouvementStockEnum;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -35,8 +33,8 @@ import lombok.ToString;
         		@UniqueConstraint(columnNames = "CODE_MOUVEMENT_STOCK",name="CODE_MOUVEMENT_STOCK_SEQUENCE")
         }
 		)
-@Builder
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
+ 
+@Setter @Getter  @ToString
 @EqualsAndHashCode(callSuper = true)
 public class MouvementStockBean extends AbstractEntity{
  
@@ -69,4 +67,21 @@ public class MouvementStockBean extends AbstractEntity{
 	private TypeMouvementStockEnum typeMVS;
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+	@Builder
+	public MouvementStockBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeMouvementStock,
+			Instant dateMouvementStock, BigDecimal quantiteMS, ArticleBean articleBean, TypeMouvementStockEnum typeMVS,
+			Integer idEntreprise) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeMouvementStock = codeMouvementStock;
+		this.dateMouvementStock = dateMouvementStock;
+		this.quantiteMS = quantiteMS;
+		this.articleBean = articleBean;
+		this.typeMVS = typeMVS;
+		this.idEntreprise = idEntreprise;
+	}
+	
+	
+	
+	
 }
