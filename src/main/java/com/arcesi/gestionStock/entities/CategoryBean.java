@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
@@ -20,22 +21,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 /**
  * 
  * @author Tibari Zeroual
  * Ingénieur Dev
  */
+@Getter
+@Setter
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name="CATEGORIE",
           uniqueConstraints = {
         		  @UniqueConstraint(columnNames ="CODE_CATEGORIE" ,name="CODE_CATEGORIE_SEQU"),
         		  @UniqueConstraint(columnNames = "CODE_UNIQUE_CATEGORIE",name = "CODE_UNIQUE_CATEGORIE_SEQU")
-          })
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor @ToString
-@EqualsAndHashCode(callSuper = true)
-public class CategoryBean extends AbstractEntity  {
+          })  
+
+//@EqualsAndHashCode(callSuper = true)
+public class CategoryBean   {
 
 	 
 	private static final long serialVersionUID = 5749431101269951781L;
@@ -57,10 +60,17 @@ public class CategoryBean extends AbstractEntity  {
 	@Column(name="DESIGNATION",length = 40,nullable = false,unique = true)
 	private String designation;
 	
+	@Transient
 	@OneToMany(mappedBy = "categoryBean",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<ArticleBean> articleBeans;
 	
 	@Column(name="identifiant_entreprise")
 	private Integer idEntreprise;
+
+	public CategoryBean() {
+		super();
+	}
+	
+	
 
 }

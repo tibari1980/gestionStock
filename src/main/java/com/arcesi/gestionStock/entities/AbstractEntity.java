@@ -11,9 +11,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import lombok.Builder;
 import lombok.Data;
+import lombok.Value;
+import lombok.experimental.NonFinal;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 
@@ -35,6 +37,6 @@ public  class AbstractEntity implements Serializable {
 	
 	@LastModifiedDate
 	@Column(name="DATE_MODIFICATION",nullable = true,insertable = true)
-	@JsonIgnore
+	//@JsonIgnore
 	public Instant lastUpdateDate;
 }
