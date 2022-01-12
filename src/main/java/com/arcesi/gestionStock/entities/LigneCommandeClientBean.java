@@ -49,7 +49,7 @@ public class LigneCommandeClientBean  extends AbstractEntity{
 			)
 	@Column(name="CODE_LIGNE_COMMANDE_CLIENT",unique = true,nullable = false)
 	private Long code;
-	@Column(name="CODE_LIGNE_COMMANDE_CLIENT_UNIQUE",length = 30,nullable = false,unique = true)
+	@Column(name="CODE_LIGNE_COMMANDE_CLIENT_UNIQUE",length = 40,nullable = false,unique = true)
 	private String codeLigneCommandClient;
 	@ManyToOne
 	@JoinColumn(name="idArticle")

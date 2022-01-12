@@ -18,6 +18,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -27,7 +28,7 @@ import lombok.ToString;
             		@UniqueConstraint(columnNames = "CODE_COMMANDE_FOUNISSEUR_UNIQUE",name = "CODE_COMMANDE_FOUNISSEUR_UNIQUE_SEQUENCE"),
             		@UniqueConstraint(columnNames = "CODE_COMMANDE_FOURNISSEUR",name="CODE_COMMANDE_FOURNISSEUR_SEQUENCE")
             })
-@ToString @Getter @Setter
+@ToString @Getter @Setter @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CommandeFournisseurBean  extends AbstractEntity{
 
@@ -47,7 +48,7 @@ public class CommandeFournisseurBean  extends AbstractEntity{
 			        )
 	@Column(name="CODE_COMMANDE_FOURNISSEUR",unique = true,nullable = false)
 	private Long code;
-	@Column(name="CODE_COMMANDE_FOUNISSEUR_UNIQUE",length = 30,unique = true,nullable = false)
+	@Column(name="CODE_COMMANDE_FOUNISSEUR_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeCommandeFounisseur;
 	@Column(name="DATE_COMMANDE")
 	private Instant dateCommande;

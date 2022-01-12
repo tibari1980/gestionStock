@@ -2,6 +2,7 @@ package com.arcesi.gestionStock.entities;
 
 import java.time.Instant;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -31,7 +33,7 @@ import lombok.ToString;
       }
 		)
  
-@Setter @Getter  @ToString
+@Setter @Getter  @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class RoleBean extends AbstractEntity {
 
@@ -49,11 +51,11 @@ public class RoleBean extends AbstractEntity {
 			)
 	@Column(name="CODE_ROLE",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_ROLE_UNIQUE",length = 30,unique = true,nullable = false)
+	@Column(name="CODE_ROLE_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeRole;
 	@Column(name="LIBELLE_ROLE",length = 30,nullable = false,insertable = true,updatable = true)
 	private String libelle;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idUtilisateur")
 	private UtilisateurBean utilisateurBean;
 	

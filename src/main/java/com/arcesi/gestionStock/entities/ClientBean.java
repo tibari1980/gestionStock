@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -35,7 +36,7 @@ import lombok.ToString;
             		 @UniqueConstraint(columnNames = "CODE_CLIENT_UNIQUE",name="CODE_CLIENT_UNIQUE_SEQUENCE")
              })
 
-@Getter @Setter @ToString
+@Getter @Setter @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 
 public class ClientBean extends AbstractEntity {
@@ -55,7 +56,7 @@ public class ClientBean extends AbstractEntity {
 	                )
 	@Column(name="CODE_CLIENT",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_CLIENT_UNIQUE",length = 30,unique = true,nullable = false)
+	@Column(name="CODE_CLIENT_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeClient;
 	@Column(name="NOM",length = 40,insertable = true,updatable = true)
 	private String nom;
@@ -72,10 +73,9 @@ public class ClientBean extends AbstractEntity {
 	@Column(name="DATE_NAISSANCE")
 	private LocalDate dateNaissance;
 	@Column(name="AGE")
-	@Transient
 	private Integer age;
 	@OneToMany(mappedBy = "clientBean")
-	private Collection<CommandeClientBean> clientBeans;
+	private Collection<CommandeClientBean> commandeClientBeans;
 	
 	public Integer getAge() {
 		return Period.between(dateNaissance, LocalDate.now()).getYears();
@@ -84,7 +84,7 @@ public class ClientBean extends AbstractEntity {
 	@Builder
 	public ClientBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeClient, String nom,
 			String prenom, String email, AdresseBean adresse, String telephone, String photo, LocalDate dateNaissance,
-			Integer age, Collection<CommandeClientBean> clientBeans) {
+			Integer age, Collection<CommandeClientBean> commandeClientBeans) {
 		super(createdDate, lastUpdateDate);
 		this.code = code;
 		this.codeClient = codeClient;
@@ -96,7 +96,7 @@ public class ClientBean extends AbstractEntity {
 		this.photo = photo;
 		this.dateNaissance = dateNaissance;
 		this.age = age;
-		this.clientBeans = clientBeans;
+		this.commandeClientBeans = commandeClientBeans;
 	}
 
 	 

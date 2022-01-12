@@ -2,9 +2,6 @@ package com.arcesi.gestionStock.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Enumerated;
-
-import com.arcesi.gestionStock.enums.TypeAdresseEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +13,7 @@ import lombok.ToString;
 
 @Data
 @Builder
-@NoArgsConstructor @AllArgsConstructor @ToString
+@NoArgsConstructor @AllArgsConstructor  @ToString
 @EqualsAndHashCode
 @Embeddable
 public class AdresseBean {
@@ -31,8 +28,13 @@ public class AdresseBean {
 	private String codePostale;
 	@Column(name="PAYS",insertable = true,updatable = true)
 	private String pays;
-	@Enumerated
-	private TypeAdresseEnum typeAdresse;
+	@Column(name="TYPE_ADRESSE")
+	private String typeAdresse;
+	
+	
+	
+	
+	
 	
 
 

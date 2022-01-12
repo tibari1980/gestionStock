@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -31,7 +32,7 @@ import lombok.ToString;
          }
 		)
  
-@Setter @Getter  @ToString
+@Setter @Getter  @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class FournisseurBean  extends AbstractEntity{
 
@@ -49,7 +50,7 @@ public class FournisseurBean  extends AbstractEntity{
 			)
 	@Column(name="CODE_FOURNISSEUR",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_FOURNISSEUR_UNIQUE",length = 30,nullable = false,unique = true)
+	@Column(name="CODE_FOURNISSEUR_UNIQUE",length = 40,nullable = false,unique = true)
 	private String codeFournisseur;
 	@Column(name="NOM",length = 40,insertable = true,updatable = true)
 	private String nom;
@@ -66,7 +67,6 @@ public class FournisseurBean  extends AbstractEntity{
 	@Column(name="DATE_NAISSANCE")
 	private LocalDate dateNaissance;
 	@Column(name="AGE")
-	@Transient
 	private Integer age;
 	@OneToMany(mappedBy = "fournisseurBean")
 	private Collection<CommandeFournisseurBean> commandeFournisseurBeans;

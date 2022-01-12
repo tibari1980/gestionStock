@@ -14,6 +14,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -29,7 +30,7 @@ import lombok.ToString;
         		@UniqueConstraint(columnNames = "CODE_VENTE",name="CODE_VENTE_SEQUENCE")
         }  
 		)
-@Setter @Getter  @ToString
+@Setter @Getter  @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class VenteBean extends AbstractEntity{
 
@@ -47,7 +48,7 @@ public class VenteBean extends AbstractEntity{
 			)
 	@Column(name="CODE_VENTE",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_VENTE_UNIQUE",length = 30,unique = true,nullable = false)
+	@Column(name="CODE_VENTE_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeVente;
 	@Column(name="DATE_VENTE")
 	private Instant dateVente;

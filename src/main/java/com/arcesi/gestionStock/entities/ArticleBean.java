@@ -19,6 +19,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -32,7 +33,7 @@ import lombok.ToString;
 		@UniqueConstraint(name = "article_code_unique", columnNames = "CODE_ARTICLE_UNIQUE") })
 @ToString
 @Getter
-@Setter
+@Setter  @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ArticleBean extends AbstractEntity {
 
@@ -42,7 +43,7 @@ public class ArticleBean extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_sequence")
 	@Column(name = "CODE_ARTICLE", nullable = false, unique = true)
 	private Long code;
-	@Column(name = "CODE_ARTICLE_UNIQUE", length = 20, unique = true)
+	@Column(name = "CODE_ARTICLE_UNIQUE", length = 40, unique = true)
 	private String codeArticle;
 	@Column(name = "DESIGNATION", length = 30, insertable = true, updatable = true)
 	private String designation;

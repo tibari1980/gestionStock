@@ -18,6 +18,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -30,7 +31,7 @@ import lombok.ToString;
 		@UniqueConstraint(columnNames = "CODE_COMMANDE_CLIENT", name = "CODE_COMMANDE_CLIENT_SEQUENCE"),
 		@UniqueConstraint(columnNames = "CODE_COMMANDE_CLIENT_UNIQUE", name = "CODE_COMMANDE_CLIENT_UNIQUE_SEQUENCE") })
 
-@ToString
+@ToString  @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
@@ -42,7 +43,7 @@ public class CommandeClientBean extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_commandeClient")
 	@Column(name = "CODE_COMMANDE_CLIENT", nullable = false, updatable = false, unique = true)
 	private Long code;
-	@Column(name = "CODE_COMMANDE_CLIENT_UNIQUE", length = 30, unique = true, nullable = false)
+	@Column(name = "CODE_COMMANDE_CLIENT_UNIQUE", length = 40, unique = true, nullable = false)
 	private String codeCommandeClient;
 
 	private Instant dateCommande;

@@ -50,7 +50,7 @@ public class LigneCommandeFournisseurBean extends AbstractEntity {
 			)
 	@Column(name="CODE_LIGNE_COMMANDE_FOURNISSEUR",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_LIGNE_COMMANDE_FOURNISSEUR_UNIQUE",length = 30,unique = true,nullable = false)
+	@Column(name="CODE_LIGNE_COMMANDE_FOURNISSEUR_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeLigneCommandeFournisseur;
 	
 	@ManyToOne

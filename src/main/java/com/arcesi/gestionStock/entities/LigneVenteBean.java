@@ -17,6 +17,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -28,7 +29,7 @@ import lombok.ToString;
 		}
 		)
  
-@Setter @Getter  @ToString
+@Setter @Getter  @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class LigneVenteBean extends AbstractEntity {
 
@@ -46,7 +47,7 @@ public class LigneVenteBean extends AbstractEntity {
 			)
 	@Column(name="CODE_LIGNE_VENTE",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_LIGNE_VENTE_UNIQUE",length = 30,nullable = false,unique = true)
+	@Column(name="CODE_LIGNE_VENTE_UNIQUE",length = 40,nullable = false,unique = true)
 	private String codeLigneVente;
 	
 	@ManyToOne

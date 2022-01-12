@@ -22,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /**
@@ -38,7 +39,7 @@ import lombok.ToString;
 
 		)
  
-@Setter @Getter   @ToString
+@Setter @Getter   @ToString @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UtilisateurBean extends AbstractEntity {
 
@@ -56,7 +57,7 @@ public class UtilisateurBean extends AbstractEntity {
 			)
 	@Column(name="CODE_UTILISATEUR",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_UTILISATEUR_UNIQUE",unique = true,nullable = false)
+	@Column(name="CODE_UTILISATEUR_UNIQUE",unique = true,nullable = false ,length = 40)
 	private String codeUtilisateur;
 	
 	@Column(name="NOM",length = 40,insertable = true,updatable = true)
@@ -112,6 +113,7 @@ public class UtilisateurBean extends AbstractEntity {
 		this.roleBeans = roleBeans;
 	}
 
+	
 	
 	
 }

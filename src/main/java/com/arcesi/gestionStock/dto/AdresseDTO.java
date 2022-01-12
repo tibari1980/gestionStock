@@ -1,7 +1,6 @@
 package com.arcesi.gestionStock.dto;
 
 import com.arcesi.gestionStock.entities.AdresseBean;
-import com.arcesi.gestionStock.enums.TypeAdresseEnum;
 
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class AdresseDTO {
  	private String ville;
  	private String codePostale;
  	private String pays;
- 	private TypeAdresseEnum typeAdresse;
+ 	private String typeAdresse;
  	
  	public static AdresseDTO fromEntity(AdresseBean adresseBean) {
  		if(adresseBean==null) {
