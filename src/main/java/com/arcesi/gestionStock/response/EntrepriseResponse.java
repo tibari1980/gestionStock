@@ -1,19 +1,23 @@
 package com.arcesi.gestionStock.response;
 
+import java.time.Instant;
 import java.util.Collection;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 
  * @author ZEROUAL TIBARI
  * ingénieur développement
  */
-@Data
-@Builder
-public class EntrepriseResponse {
-
+@Setter
+@Getter
+public class EntrepriseResponse extends AbstractEntityResponse {
+ 
+	 
+	private static final long serialVersionUID = 1642559358929885107L;
 	private Long code;
  	private String codeEntreprise;
  	private String raisonSocial;
@@ -23,4 +27,21 @@ public class EntrepriseResponse {
  	private String email;
  	private String telephone;
 	private Collection<UtilisateurResponse> utilisateurResponses;
+	@Builder
+	public EntrepriseResponse(Instant createdDate, Instant lastUpdateDate, Long code, String codeEntreprise,
+			String raisonSocial, String siret, String numeroTVA, AdresseResponse adressResponse, String email,
+			String telephone, Collection<UtilisateurResponse> utilisateurResponses) {
+		super(createdDate, lastUpdateDate);
+		this.code = code;
+		this.codeEntreprise = codeEntreprise;
+		this.raisonSocial = raisonSocial;
+		this.siret = siret;
+		this.numeroTVA = numeroTVA;
+		this.adressResponse = adressResponse;
+		this.email = email;
+		this.telephone = telephone;
+		this.utilisateurResponses = utilisateurResponses;
+	}
+	
+	
 }

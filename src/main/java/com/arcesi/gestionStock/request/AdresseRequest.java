@@ -1,7 +1,5 @@
 package com.arcesi.gestionStock.request;
 
-import com.arcesi.gestionStock.enums.TypeAdresseEnum;
-
 import lombok.Data;
 /**
  * 
@@ -17,5 +15,5 @@ public class AdresseRequest {
  	private String ville;
  	private String codePostale;
  	private String pays;
- 	private TypeAdresseEnum typeAdresse;
+ 	private String typeAdresse;
 }

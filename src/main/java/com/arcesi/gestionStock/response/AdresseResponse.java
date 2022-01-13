@@ -19,5 +19,5 @@ public class AdresseResponse {
  	private String ville;
  	private String codePostale;
  	private String pays;
- 	private TypeAdresseEnum typeAdresse;
+ 	private String typeAdresse;
 }

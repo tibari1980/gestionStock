@@ -52,7 +52,7 @@ public class MouvementStockBean extends AbstractEntity{
 			)
 	@Column(name="CODE_MOUVEMENT_STOCK",nullable = false,unique = true)
 	private Long code;
-	@Column(name="CODE_MOUVEMENT_STOCK_UNIQUE",length = 30,nullable = false,unique = true)
+	@Column(name="CODE_MOUVEMENT_STOCK_UNIQUE",length = 40,nullable = false,unique = true)
 	private String codeMouvementStock;
 	
 	@Column(name="DATE_MOUVMENT_STOCK")

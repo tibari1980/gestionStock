@@ -25,6 +25,7 @@ import com.arcesi.gestionStock.entities.FournisseurBean;
 import com.arcesi.gestionStock.entities.LigneCommandeClientBean;
 import com.arcesi.gestionStock.entities.LigneCommandeFournisseurBean;
 import com.arcesi.gestionStock.entities.LigneVenteBean;
+import com.arcesi.gestionStock.entities.MouvementStockBean;
 import com.arcesi.gestionStock.entities.RoleBean;
 import com.arcesi.gestionStock.entities.UtilisateurBean;
 import com.arcesi.gestionStock.entities.VenteBean;
@@ -40,6 +41,7 @@ import com.arcesi.gestionStock.repositories.FournisseurRepository;
 import com.arcesi.gestionStock.repositories.LigneCommandeClientRepository;
 import com.arcesi.gestionStock.repositories.LigneCommandeFournisseurRepository;
 import com.arcesi.gestionStock.repositories.LigneVenteRepository;
+import com.arcesi.gestionStock.repositories.MouvementStockRepository;
 import com.arcesi.gestionStock.repositories.RoleRepository;
 import com.arcesi.gestionStock.repositories.UtilisateurRepository;
 import com.arcesi.gestionStock.repositories.VenteRepository;
@@ -87,6 +89,8 @@ public class JeuDeDonne implements CommandLineRunner {
 	LigneVenteRepository ligneVenteRepository;
 	@Autowired
 	RoleRepository roleRepository;
+	@Autowired
+	MouvementStockRepository mouvementStockRepository;
 
 
 	@SuppressWarnings("deprecation")
@@ -358,6 +362,23 @@ public class JeuDeDonne implements CommandLineRunner {
 				
 			}
 		 //===================================fin insertion fournisseur====================*/
+	     //=========================================insertion mouvement de stock==========/
+		 for(int i=0;i<600;i++) {
+			 EntrepriseBean entrpe=entrepriseRepository.findById(new Long(genererInt(1, 10))).get();
+			 ArticleBean articleBean=articleRepository.findById(new Long(genererInt(1, 1800))).get();
+			 MouvementStockBean mstock= MouvementStockBean.builder()
+			 .codeMouvementStock(UUID.randomUUID().toString().replace("-", ""))
+			 .createdDate(Instant.now())
+			 .lastUpdateDate(null)
+			 .dateMouvementStock(Instant.now())
+			 .idEntreprise(entrpe.getCode().intValue())
+			 .articleBean(articleBean)
+			 .build();
+			 
+			 mouvementStockRepository.save(mstock);
+		 }
+		 //====================================fin insertion mouv============================================:
+	
 	}
 	
 	
