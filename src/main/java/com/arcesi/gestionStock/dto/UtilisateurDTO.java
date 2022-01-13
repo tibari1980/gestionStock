@@ -70,11 +70,7 @@ public class UtilisateurDTO {
 				.dateNaissance(dto.getDateNaissance())
 				.age(dto.getAge())
 				.entrepriseBean(EntrepriseDTO.toEntrepriseDTO(dto.getEntrepriseDTO()))
-				.roleBeans(
-						dto.getRoleDTOs()!=null ? 
-						dto.getRoleDTOs().stream()
-						.map(RoleDTO::toRoleDTO)
-						.collect(Collectors.toList()):null)
-				        .build();
+				.roleBeans(null)
+				 .build();
 	}
 }

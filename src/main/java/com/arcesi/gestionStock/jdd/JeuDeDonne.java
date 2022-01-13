@@ -5,6 +5,8 @@ import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -87,6 +89,7 @@ public class JeuDeDonne implements CommandLineRunner {
 	RoleRepository roleRepository;
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -279,27 +282,49 @@ public class JeuDeDonne implements CommandLineRunner {
 			 ligneVenteRepository.save(ligneVenteBean);
 		 }
 		 //**************************************fin insertion ligne vente===================/
-//		 for(int i=0;i<4;i++) {
-//			 UtilisateurBean utilisateur=utilisateurRepository.findById(new Long(genererInt(1,100 ))).get();
-//			 
-//			 RoleBean role=RoleBean.builder()
-//					 .createdDate(Instant.now())
-//					 .codeRole(UUID.randomUUID().toString().replace("-", ""))
-//					 .lastUpdateDate(null)
-//					 .utilisateurBean(null)
-//					 
-//					 .build();
-//			 if(i%2==0) {
-//				 role.setLibelle(TypeRoleEnum.CLIENT.getId());
-//			 }else {
-//				 role.setLibelle(TypeRoleEnum.ADMIN.getId());
-//			 }
-//			 roleRepository.save(role);
-//		 }
+		/* for(int i=0;i<4;i++) {
+			 UtilisateurBean utilisateur=utilisateurRepository.findById(new Long(genererInt(1,100 ))).get();
+			 
+			 RoleBean role=RoleBean.builder()
+					 .createdDate(Instant.now())
+					 .codeRole(UUID.randomUUID().toString().replace("-", ""))
+					 .lastUpdateDate(null)
+					 .utilisateurBeans(null)
+					 .build();
+			 if(i%2==0) {
+				 role.setLibelle(TypeRoleEnum.CLIENT.getId());
+			 }else {
+				 role.setLibelle(TypeRoleEnum.ADMIN.getId());
+			 }
+			 roleRepository.save(role);
+		 }*/
+		 RoleBean admin=RoleBean.builder().createdDate(Instant.now())
+				   .lastUpdateDate(null)
+				   .codeRole(UUID.randomUUID().toString().replace("-", ""))
+				   .libelle(TypeRoleEnum.ADMIN.getId())
+				   .build();
+		 roleRepository.save(admin);
+		 RoleBean manager=RoleBean.builder().createdDate(Instant.now())
+				   .lastUpdateDate(null)
+				   .codeRole(UUID.randomUUID().toString().replace("-", ""))
+				   .libelle(TypeRoleEnum.MANAGER.getId())
+				   .build();
+		 roleRepository.save(manager);
+		 RoleBean client=RoleBean.builder().createdDate(Instant.now())
+				   .lastUpdateDate(null)
+				   .codeRole(UUID.randomUUID().toString().replace("-", ""))
+				   .libelle(TypeRoleEnum.CLIENT.getId())
+				   .build();
+		 roleRepository.save(client);
 		 //============================================insertion utilisateur================*/
 		 for(int i=1;i<100;i++) {
 			    EntrepriseBean entre=entrepriseRepository.findById(new Long(genererInt(1, 10))).get();
-			 
+		    	List<RoleBean> rolesBeans=new ArrayList<RoleBean>();
+		    	for(int j=1;j<3;j++) {
+		    		RoleBean role=roleRepository.findById(new Long(genererInt(1, 3))).get();
+		    		rolesBeans.add(role);
+		    	}
+			    	
 			    UtilisateurBean utilisateur=UtilisateurBean.builder()
 						.codeUtilisateur(UUID.randomUUID().toString().replace("-", ""))
 						.nom("nomUtilisateur"+i)
@@ -310,6 +335,7 @@ public class JeuDeDonne implements CommandLineRunner {
 						.entrepriseBean(entre)
 						.createdDate(Instant.now())
 						.lastUpdateDate(null)
+						.roleBeans(rolesBeans)
 						.password(generateRandomString(34))
 						.telephone("062549164"+i)
 						.photo("photo.jpeg")
@@ -323,6 +349,11 @@ public class JeuDeDonne implements CommandLineRunner {
 				    }else if(utilisateur.getAge()<7) {
 				    	utilisateur.setAge(utilisateur.getAge()+28);
 				    }
+				   
+				      // utilisateur.getRoleBeans().add(role);
+				       //role.getUtilisateurBeans().add(utilisateur);
+				    
+				    
 				    utilisateurRepository.save(utilisateur);
 				
 			}

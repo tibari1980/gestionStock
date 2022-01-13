@@ -3,17 +3,23 @@ package com.arcesi.gestionStock.entities;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -84,8 +90,13 @@ public class UtilisateurBean extends AbstractEntity {
 	@JoinColumn(name="idEntreprise")
 	private EntrepriseBean entrepriseBean;
 	
-	@OneToMany(mappedBy = "utilisateurBean")
-	private Collection<RoleBean> roleBeans;
+	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+	@JoinTable(
+			  name = "utilisateur_role", 
+			  joinColumns = @JoinColumn(name = "CODE_UTILISATEUR"), 
+			  inverseJoinColumns = @JoinColumn(name = "CODE_ROLE"))
+	private List<RoleBean> roleBeans= new ArrayList<RoleBean>();
 	
 	//permet de calculer l'age 
 	
@@ -96,7 +107,7 @@ public class UtilisateurBean extends AbstractEntity {
 	@Builder
 	public UtilisateurBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeUtilisateur, String nom,
 			String prenom, String email, String password, AdresseBean adresse, String telephone, String photo,
-			LocalDate dateNaissance, Integer age, EntrepriseBean entrepriseBean, Collection<RoleBean> roleBeans) {
+			LocalDate dateNaissance, Integer age, EntrepriseBean entrepriseBean, List<RoleBean> roleBeans) {
 		super(createdDate, lastUpdateDate);
 		this.code = code;
 		this.codeUtilisateur = codeUtilisateur;
@@ -113,6 +124,7 @@ public class UtilisateurBean extends AbstractEntity {
 		this.roleBeans = roleBeans;
 	}
 
+	
 	
 	
 	

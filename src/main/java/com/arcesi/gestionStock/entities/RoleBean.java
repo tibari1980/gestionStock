@@ -1,15 +1,18 @@
 package com.arcesi.gestionStock.entities;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -53,21 +56,21 @@ public class RoleBean extends AbstractEntity {
 	private Long code;
 	@Column(name="CODE_ROLE_UNIQUE",length = 40,unique = true,nullable = false)
 	private String codeRole;
-	@Column(name="LIBELLE_ROLE",length = 30,nullable = false,insertable = true,updatable = true)
+	@Column(name="LIBELLE_ROLE",length = 40)
 	private String libelle;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idUtilisateur")
-	private UtilisateurBean utilisateurBean;
-	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE,mappedBy = "roleBeans")
+	private List<UtilisateurBean> utilisateurBeans=new ArrayList<UtilisateurBean>();
 	@Builder
 	public RoleBean(Instant createdDate, Instant lastUpdateDate, Long code, String codeRole, String libelle,
-			UtilisateurBean utilisateurBean) {
+			List<UtilisateurBean> utilisateurBeans) {
 		super(createdDate, lastUpdateDate);
 		this.code = code;
 		this.codeRole = codeRole;
 		this.libelle = libelle;
-		this.utilisateurBean = utilisateurBean;
+		this.utilisateurBeans = utilisateurBeans;
 	}
+	
+	 
 	
 	
 	
